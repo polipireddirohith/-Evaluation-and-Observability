@@ -1,0 +1,39 @@
+OS & Version: Microsoft Windows 11 (NT 10.0.26200.0, win32 x86_64)
+Python Version: Python 3.13.1 (CPython 64-bit at C:\Python313\python.exe)
+Date of Run: 2026-09-23
+
+Virtual Environment Setup:
+Each reference system is isolated in its own virtual environment using Python 3.13.1:
+
+1. System 1 (Validated, Routed Insurance Policy Pipeline):
+   Location: systems/01-policy-pipeline/.venv
+   Creation: uv venv systems/01-policy-pipeline/.venv --python "C:\Python313\python.exe"
+   Install: uv pip install -e "systems/01-policy-pipeline[dev]"
+   Verification:
+     - pytest tests/ -v (45 passed, 3 live tests skipped)
+     - mypy policy_extractor/ (0 issues)
+     - ruff check policy_extractor/ tests/ (All checks passed)
+
+2. System 2 (Schema-Enforced Two-Pass Mortgage Document Extraction):
+   Location: systems/02-mortgage-extraction/.venv
+   Creation: uv venv systems/02-mortgage-extraction/.venv --python "C:\Python313\python.exe"
+   Install: uv pip install -e "systems/02-mortgage-extraction[dev]"
+   Verification:
+     - pytest tests/ -v (25 passed)
+     - mypy mortgage_extractor/ (0 issues)
+     - ruff check mortgage_extractor/ tests/ (All checks passed)
+
+3. System 3 (Provenance-Preserving Multi-Source Supply Chain Risk Synthesis):
+   Location: systems/03-supply-chain/.venv
+   Creation: uv venv systems/03-supply-chain/.venv --python "C:\Python313\python.exe"
+   Install: uv pip install -e "systems/03-supply-chain[dev]"
+   Verification:
+     - pytest tests/ -v (34 passed)
+     - mypy supply_chain_risk/ (0 issues)
+     - ruff check supply_chain_risk/ tests/ (All checks passed)
+
+API Mode Note:
+Runs were conducted using the deterministic offline/replay architecture:
+- System 1: Offline routing suite (test_us04_routing.py, 9 passed) and sliced calibration report.
+- System 2: Offline replay mode (--mode replay) exercising unit normalization, missing fields, and arithmetic consistency checks.
+- System 3: Offline investigation mode (--offline and --offline --simulate-timeout) with sentence-transformers embedding model.

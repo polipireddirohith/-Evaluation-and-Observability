@@ -1,0 +1,5 @@
+$ mypy policy_extractor/
+Success: no issues found in 11 source files
+
+$ ruff check policy_extractor/ tests/
+All checks passed!
